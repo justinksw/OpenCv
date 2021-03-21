@@ -35,27 +35,31 @@ def remove_bg(img,
     return img_a.astype('float32')*255.0
 
 
-img_original = cv2.imread("1.jpg")
+if __name__ == '__main__':
 
-t_blur = 21
-thresh_1 = 50
-thresh_2 = 70
-dilate = 10
-erode = 6
+    in_file = 'sample.jpg'
 
-# t_blur = 21
-# thresh_1 = 50
-# thresh_2 = 70
-# dilate = 10
-# erode = 6
+    out_file = in_file.split('.')[-2] + '_nobg.png'  # keep in this type
 
-img_fin = remove_bg(img_original.copy(),
-                    BLUR=t_blur,
-                    CANNY_THRESH_1=thresh_1,
-                    CANNY_THRESH_2=thresh_2,
-                    MASK_DILATE_ITER=dilate,
-                    MASK_ERODE_ITER=erode)
+    img_original = cv2.imread(in_file)
 
-cv2.imwrite("out.png", cv2.cvtColor(img_fin, cv2.COLOR_RGBA2BGRA))
+    t_blur = 21
+    thresh_1 = 50
+    thresh_2 = 70
+    dilate = 10
+    erode = 6
 
+    # t_blur = 21
+    # thresh_1 = 50
+    # thresh_2 = 70
+    # dilate = 10
+    # erode = 6
 
+    img_fin = remove_bg(img_original.copy(),
+                        BLUR=t_blur,
+                        CANNY_THRESH_1=thresh_1,
+                        CANNY_THRESH_2=thresh_2,
+                        MASK_DILATE_ITER=dilate,
+                        MASK_ERODE_ITER=erode)
+
+    cv2.imwrite(out_file, cv2.cvtColor(img_fin, cv2.COLOR_RGBA2BGRA))
